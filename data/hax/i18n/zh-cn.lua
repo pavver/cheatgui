@@ -1,1 +1,14 @@
-return {}
+return {
+ ["common.yes"]="是",["common.no"]="否",["common.none"]="无",["common.enable"]="启用",["common.disable"]="禁用",["common.from"]="从",["common.to"]="到",["nav.back"]="< 返回",
+ ["filter.alphabetize"]="按字母排序：",["filter.label"]="筛选：",["filter.hint"]="[Shift+输入以筛选]",["filter.show_localized_names"]="显示本地化名称：",
+ ["panel.always_cast"]="始终施放",["panel.flasks"]="药瓶",["panel.fungal"]="真菌转化",["panel.gold"]="黄金",["panel.grid_reference"]="界面网格参考",["panel.health"]="生命",["panel.items"]="物品",["panel.perks"]="天赋",["panel.shift_material"]="转化材料",["panel.spells"]="法术",["panel.teleport"]="传送",["panel.wand_builder"]="法杖生成器",["panel.wands"]="法杖",["panel.widgets"]="信息组件",
+ ["wand.shuffle"]="乱序",["wand.mana"]="法力",["wand.mana_recharge"]="法力恢复",["wand.slots"]="槽位",["wand.multicast"]="多重施放",["wand.reload"]="充能时间",["wand.delay"]="施放延迟",["wand.spread"]="散射",["wand.speed"]="速度",["wand.always_cast"]="始终施放",["wand.reset_all"]="[全部重置]",["wand.spawn"]="[生成]",["wand.level"]="{level}级法杖",["wand.haxx"]="Haxx",
+ ["teleport.get_current_position"]="[获取当前位置]",["teleport.zero_position"]="[位置归零]",["teleport.teleport"]="[传送]",["teleport.quick"]="----快速传送----",["teleport.attempt"]="正在尝试传送至 ({x}, {y})",
+ ["health.hp"]="生命值",["health.max_hp"]="生命上限",["health.get_current"]="[获取当前生命]",["health.apply"]="[应用生命值修改]",["health.quick"]="----快速生命修改----",["health.add_max"]="[生命上限 +{amount}]",
+ ["gold.label"]="黄金",["gold.get_current"]="[获取当前黄金]",["gold.set_current"]="[设置当前黄金]",["gold.quick"]="----快速获取黄金----",["gold.add"]="[黄金 +{amount}]",
+ ["spawn.quantity_multiplier"]="数量倍率：",["spawn.container"]="容器：",["spawn.potion"]="药水",["spawn.pouch"]="材料袋",["spawn.select_flask"]="选择要生成的药瓶：",["spawn.select_item"]="选择要生成的物品：",["spawn.select_material"]="选择材料：",["spawn.select_perk"]="选择要生成的天赋：",["spawn.select_spell"]="选择要生成的法术：",["spawn.select_always_cast"]="选择法术：",["spawn.select_wand"]="选择要生成的法杖：",["spawn.attempt_spell"]="正在尝试生成 {id}",["spawn.attempt_perk"]="正在尝试生成 {id}",["spawn.attempt_potion"]="正在尝试生成 {id} 药水",["spawn.attempt_item"]="正在尝试生成 {path}",["spawn.crystal_key"]="水晶钥匙",["spawn.sampo"]="三宝",
+ ["tourist.status"]="观光模式：{enabled}",["tourist.toggle"]="[{action}观光模式]",
+ ["widget.added"]="正在将 {name} 添加到信息栏（最小化 Cheatgui 后可见）",["widget.playtime"]="游戏时间",["widget.visited"]="已到访",["widget.gold"]="黄金",["widget.hearts"]="心",["widget.items"]="物品",["widget.shot"]="射击",["widget.kicked"]="踢击",["widget.kills"]="击杀",["widget.damage_taken"]="受到伤害",["widget.frame"]="帧：{frame}",["widget.position"]="X：{x}，Y：{y}",
+ ["fungal.next_shift"]="下次转化：{result}",["fungal.next_shift_offset"]="下次转化+{offset}：{result}",["fungal.no_effect"]="无效果（来源与目标选择了相同材料）",["fungal.force_convert"]="[强制转化]",["fungal.would_convert"]="将会转化：{from} -> {to}",
+ ["error.gui"]="Cheatgui 错误：{error}",["cheat.edit_wands_everywhere"]="[随处编辑法杖]",["cheat.spell_refresh"]="[刷新法术]",["cheat.full_heal"]="[完全恢复]",["cheat.end_fungal_trip"]="[结束真菌幻觉]",["cheat.reset_fungal_shift_timer"]="[重置真菌转化计时器]",["cheat.spawn_orbs"]="[生成魔法球]",["material.liquids"]="液体",["material.solids"]="固体",["material.sands"]="粉末",["material.gases"]="气体",["material.fires"]="火焰"
+}
