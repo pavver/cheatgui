@@ -15,6 +15,8 @@ local locale_aliases = {
   pt = "pt-br",
   ["pt-br"] = "pt-br",
   ru = "ru",
+  ua = "uk",
+  uk = "uk",
   zh = "zh-cn",
   ["zh-cn"] = "zh-cn"
 }
