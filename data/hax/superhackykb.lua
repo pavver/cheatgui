@@ -12,6 +12,9 @@ hack_type = function()
   return ""
 end
 
+hack_discard_text_input = function()
+end
+
 if not require then
   print("No require? Urgh.")
   return
@@ -30,8 +33,48 @@ ffi.cdef([[
   uint32_t SDL_GetKeyFromScancode(uint32_t scancode);
   char* SDL_GetScancodeName(uint32_t scancode);
   char* SDL_GetKeyName(uint32_t key);
+  typedef struct SDL_TextInputEvent {
+    uint32_t type;
+    uint32_t timestamp;
+    uint32_t windowID;
+    char text[32];
+  } SDL_TextInputEvent;
+  typedef union SDL_Event {
+    uint32_t type;
+    SDL_TextInputEvent text;
+    uint8_t padding[56];
+  } SDL_Event;
+  typedef int (*SDL_EventFilter)(void* userdata, SDL_Event* event);
+  void SDL_AddEventWatch(SDL_EventFilter filter, void* userdata);
+  void SDL_StartTextInput(void);
 ]])
 _SDL = ffi.load('SDL2.dll')
+
+local SDL_TEXTINPUT = 0x303
+local pending_text_input = {}
+
+_keyboard_event_watch = ffi.cast("SDL_EventFilter", function(_, event)
+  if event[0].type == SDL_TEXTINPUT then
+    local text = ffi.string(event[0].text.text)
+    if text ~= "" then
+      pending_text_input[#pending_text_input + 1] = text
+    end
+  end
+  return 1
+end)
+
+_SDL.SDL_AddEventWatch(_keyboard_event_watch, nil)
+_SDL.SDL_StartTextInput()
+
+local function take_text_input()
+  local text = table.concat(pending_text_input)
+  pending_text_input = {}
+  return text
+end
+
+hack_discard_text_input = function()
+  pending_text_input = {}
+end
 
 local code_to_a = {}
 local shifts = {}
@@ -80,16 +123,27 @@ local REPLACEMENTS = {
 
 hack_type = function(current_str, no_shift)
   local pressed, shift_held = hack_update_keys()
+  local text_input = take_text_input()
+  local received_text_input = text_input ~= ""
   local hit_enter = false
+
+  if received_text_input and (no_shift or shift_held) then
+    current_str = current_str .. text_input
+  end
+
   for _, key in ipairs(pressed) do
-    if (no_shift or shift_held) and REPLACEMENTS[key] then
-      current_str = current_str .. REPLACEMENTS[key]
-    elseif (no_shift or shift_held) and utf8_is_single_character(key) then
-      current_str = current_str .. key
-    elseif key == "backspace" then
+    if key == "backspace" then
       current_str = utf8_remove_last_character(current_str)
     elseif key == "enter" or key == "return" then
       hit_enter = true
+    elseif not received_text_input
+        and (no_shift or shift_held)
+        and REPLACEMENTS[key] then
+      current_str = current_str .. REPLACEMENTS[key]
+    elseif not received_text_input
+        and (no_shift or shift_held)
+        and utf8_is_single_character(key) then
+      current_str = current_str .. key
     end
   end
   return current_str, hit_enter

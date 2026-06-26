@@ -50,3 +50,6 @@ All notable changes to Cheatgui are documented in this file.
   characters (`c3b74f7`).
 - Made filter matching literal so characters meaningful to Lua patterns no
   longer break or alter searches (`c3b74f7`).
+- Switched filter typing to SDL's UTF-8 text-input events so active keyboard
+  layouts and input methods can provide non-Latin text under compatibility
+  layers such as Proton.

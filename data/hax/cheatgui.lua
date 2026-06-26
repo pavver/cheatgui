@@ -42,7 +42,10 @@ local function handle_typing()
     type_target = _shift_target
     req_shift = true
   end
-  if not type_target then return end
+  if not type_target then
+    hack_discard_text_input()
+    return
+  end
   local prev_val = type_target.value
   local hit_enter = false
   type_target.value, hit_enter = hack_type(prev_val, not req_shift)
