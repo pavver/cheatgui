@@ -28,6 +28,8 @@ All notable changes to Cheatgui are documented in this file.
   names (`c2a4025`).
 - Always-cast spell selections now display localized spell names in the wand
   builder (`c2a4025`).
+- Menu filters now search localized names, original English game translations,
+  and technical IDs at the same time.
 
 ### Fixed
 

@@ -265,8 +265,22 @@ local function filter_options(options, str)
   local ret = {}
   local normalized_filter = utf8_lower(str)
   for _, opt in ipairs(options) do
-    local text = utf8_lower(maybe_call(opt.text, opt))
-    if text:find(normalized_filter, 1, true) then
+    local matches = false
+    local search_values = {
+      maybe_call(opt.text or opt[1], opt),
+      opt.ui_name,
+      opt.english_name,
+      opt.id,
+      opt.path
+    }
+    for _, value in pairs(search_values) do
+      if type(value) == "string"
+          and utf8_lower(value):find(normalized_filter, 1, true) then
+        matches = true
+        break
+      end
+    end
+    if matches then
       table.insert(ret, opt)
     end
   end
@@ -741,6 +755,7 @@ local spell_options = {}
 local always_cast_options = {
   {
     text = tr("common.none"),
+    english_name = tr_english("common.none"),
     f = function()
       set_always_cast(nil)
     end
@@ -754,12 +769,16 @@ for idx, card in ipairs(actions) do
   localized_spell_names[id] = ui_name
   spell_options[idx] = {
     text = localized_name,
-    id = id, ui_name = ui_name,
+    id = id,
+    ui_name = ui_name,
+    english_name = resolve_english_name(card.name, id),
     f = spawn_spell_button
   }
   always_cast_options[idx+1] = {
     text = localized_name,
-    id = id, ui_name = ui_name,
+    id = id,
+    ui_name = ui_name,
+    english_name = resolve_english_name(card.name, id),
     f = set_always_cast
   }
 end
@@ -774,7 +793,8 @@ for idx, perk in ipairs(perk_list) do
   perk_options[idx] = {
     text = localized_name, 
     id = perk.id,
-    ui_name = resolve_localized_name(perk.ui_name, perk.id), 
+    ui_name = resolve_localized_name(perk.ui_name, perk.id),
+    english_name = resolve_english_name(perk.ui_name, perk.id),
     f = spawn_perk_button
   }
 end
@@ -795,7 +815,9 @@ for idx, matinfo in ipairs(materials_list) do
   if material:sub(1,1) ~= "-" then
     potion_options[idx] = {
       text = localized_name, 
-      ui_name = translated_material, id = material,
+      ui_name = translated_material,
+      english_name = resolve_english_name("$mat_" .. material, material),
+      id = material,
       f = spawn_potion_button
     }
   else
@@ -807,10 +829,15 @@ local wand_options = {}
 for i = 1, 5 do
   wand_options[i] = {
     tr("wand.level", {level=i}),
-    wrap_spawn("data/entities/items/wand_level_0" .. i .. ".xml")
+    wrap_spawn("data/entities/items/wand_level_0" .. i .. ".xml"),
+    english_name = tr_english("wand.level", {level=i})
   }
 end
-table.insert(wand_options, {tr("wand.haxx"), wrap_spawn("data/hax/wand_hax.xml")})
+table.insert(wand_options, {
+  tr("wand.haxx"),
+  wrap_spawn("data/hax/wand_hax.xml"),
+  english_name = tr_english("wand.haxx")
+})
 
 local tourist_mode_on = false
 local function toggle_tourist_mode()
@@ -917,6 +944,8 @@ for idx, item in ipairs(spawn_list) do
     path = item.path,
     id = item.xml,
     ui_name = resolve_localized_name(item.name, item.xml),
+    english_name = item.english_name
+        or resolve_english_name(item.name, item.xml),
     f = spawn_item_button
   }
 end
