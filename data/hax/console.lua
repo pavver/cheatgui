@@ -350,7 +350,7 @@ local function check_authorization(client, msg)
   if msg:find(get_token()) then
     client.authorized = true
     client.sock:send("SYS> AUTHORIZED")
-    GamePrint("Accepted console connection: " .. client.addr)
+    GamePrint(tr("console.accepted_connection", {address=client.addr}))
   else
     client.sock:send("SYS> UNAUTHORIZED: INVALID TOKEN")
     client.sock:close()

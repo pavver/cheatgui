@@ -12,8 +12,18 @@ if not DebugGetIsDevBuild() then
   end
 end
 
-for _, category in ipairs{"Liquids", "Solids", "Sands", "Gases", "Fires"} do
-  table.insert(materials_list, {"-- " .. category .. " --", "-- " .. category .. " --"})
+local material_categories = {
+  {"Liquids", "material.liquids"},
+  {"Solids", "material.solids"},
+  {"Sands", "material.sands"},
+  {"Gases", "material.gases"},
+  {"Fires", "material.fires"}
+}
+
+for _, category_info in ipairs(material_categories) do
+  local category, category_key = unpack(category_info)
+  local category_name = tr(category_key)
+  table.insert(materials_list, {"-- " .. category_name .. " --", "-- " .. category_name .. " --"})
   local mats = getfenv()["CellFactory_GetAll" .. category]()
   print("Got " .. #mats .. " " .. category)
   table.sort(mats)
