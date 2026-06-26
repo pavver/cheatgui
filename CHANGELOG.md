@@ -53,3 +53,5 @@ All notable changes to Cheatgui are documented in this file.
 - Switched filter typing to SDL's UTF-8 text-input events so active keyboard
   layouts and input methods can provide non-Latin text under compatibility
   layers such as Proton.
+- Prevented the Shift modifier used to activate filtering from forcing all
+  entered text to uppercase.

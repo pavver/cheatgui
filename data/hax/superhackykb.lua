@@ -128,7 +128,8 @@ hack_type = function(current_str, no_shift)
   local hit_enter = false
 
   if received_text_input and (no_shift or shift_held) then
-    current_str = current_str .. text_input
+    current_str = current_str
+        .. (no_shift and text_input or utf8_lower(text_input))
   end
 
   for _, key in ipairs(pressed) do
