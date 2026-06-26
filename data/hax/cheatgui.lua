@@ -14,12 +14,8 @@ dofile_once("data/hax/utils.lua")
 
 local CHEATGUI_VERSION = "1.5.0"
 local CHEATGUI_TITLE = "cheatgui " .. CHEATGUI_VERSION
-local console_connected = false
 
-if _keyboard_present then
-  -- have FFI
-  dofile_once("data/hax/console.lua")
-else
+if not _keyboard_present then
   CHEATGUI_TITLE = CHEATGUI_TITLE .. "S" 
 end
 
@@ -86,7 +82,7 @@ local gui = _cheat_gui
 
 local closed_panel, perk_panel, cards_panel, menu_panel, flasks_panel
 local wands_panel, builder_panel, always_cast_panel, teleport_panel, info_panel
-local health_panel, money_panel, spawn_panel, console_panel
+local health_panel, money_panel, spawn_panel
 
 local function Panel(options)
   if not options.name then
@@ -848,12 +844,6 @@ local function toggle_tourist_mode()
   }))
 end
 
-local function open_console()
-  local auth_token = listen_console_connections()
-  console_connected = true
-  os.execute("start http://localhost:8777/index.html?token=" .. (auth_token or "none"))
-end
-
 local seedval = "?"
 SetRandomSeed(0, 0)
 seedval = tostring(Random() * 2^31)
@@ -1027,52 +1017,11 @@ local fungal_panel = Panel{tr("panel.fungal"), function()
 end}
 
 
-console_panel = Panel{tr("panel.console"), function()
-  breadcrumbs(1, 0)
-  GuiLayoutBeginVertical(gui, 1, 11)
-  if console_connected then
-    if GuiButton( gui, 0, 0, tr("console.close_host"), next_id() ) then
-      close_console_connections()
-      console_connected = false
-    end
-  else
-    if GuiButton( gui, 0, 0, tr("console.open_host"), next_id() ) then
-      listen_console_connections()
-      console_connected = true
-    end
-  end
-  if GuiButton( gui, 0, 0, tr("console.open_new"), next_id() ) then
-    open_console()
-  end
-  GuiText(gui, 0, 0, " ") -- just a spacer
-  GuiText(gui, 0, 0, tr("console.active_connections"))
-  local conns = get_console_connections()
-  local sorted_conns = {}
-  for addr, client in pairs(conns) do
-    table.insert(sorted_conns, addr)
-  end
-  table.sort(sorted_conns)
-  for _, addr in ipairs(sorted_conns) do
-    local conn = conns[addr] or {stat_out=-1, stat_in=-1}
-    local text = tr("console.connection_stats", {
-      address=addr,
-      input=conn.stat_in or 0,
-      output=conn.stat_out or 0
-    })
-    if GuiButton( gui, 0, 0, text, next_id() ) then
-      if conns[addr] then conns[addr]:close() end
-    end
-  end
-  GuiLayoutEnd(gui)
-end}
-
 local main_panels = {
   perk_panel, cards_panel, flasks_panel, wands_panel, spawn_panel,
   builder_panel, health_panel, money_panel,
   teleport_panel, fungal_panel, info_panel, gui_grid_ref_panel
 }
-
-if _keyboard_present then table.insert(main_panels, console_panel) end
 
 local function draw_main_panels()
   for idx, panel in ipairs(main_panels) do
@@ -1120,13 +1069,6 @@ register_cheat_button(tr("cheat.spawn_orbs"), function()
     EntityLoad(("data/entities/items/orbs/orb_%02d.xml"):format(i), x+(i*15), y - (i*5))
   end
 end)
-
-if _keyboard_present then
-  register_cheat_button(tr("cheat.open_console"), function()
-    open_console()
-    enter_panel(console_panel)
-  end)
-end
 
 enter_panel(menu_panel)
 
@@ -1205,15 +1147,11 @@ function _cheat_gui_main()
     if not happy then
       print("Gui error: " .. errstr)
       GamePrint(tr("error.gui", {error=errstr}))
-      if console_connected then
-        send_all_consoles(errstr .. ":" .. debug.traceback())
-      end
       hide_gui()
     end
   end
 
   wake_up_waiting_threads(1) -- from coroutines.lua
-  if console_connected and _socket_update then _socket_update() end
 end
 
 hide_gui()

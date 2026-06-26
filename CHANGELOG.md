@@ -15,6 +15,11 @@ All notable changes to Cheatgui are documented in this file.
 - Added UTF-8 helpers for text input, case normalization, and safe character
   deletion (`c3b74f7`).
 
+### Removed
+
+- Removed the legacy web console, its bundled frontend, Pollnet bindings, and
+  the external `pollnet.dll` requirement.
+
 ### Changed
 
 - Localized spell, perk, material, and item names are now displayed by default

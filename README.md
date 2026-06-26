@@ -27,8 +27,6 @@ cd {your Noita install dir}/mods/
 git clone https://github.com/probable-basilisk/cheatgui.git
 ```
 
-**IMPORTANT**: You will need to get the `pollnet.dll` binary from the [release zip](https://github.com/probable-basilisk/cheatgui/releases/download/v1.3.0/cheatgui_v1_3_0_beta.zip), located in `bin/pollnet.dll`. You should copy this file to `Noita/mods/cheatgui/bin/pollnet.dll`.
-
 ### Enable the mod in Noita
 
 Enable the 'cheatgui' mod through the in-game pause menu.
@@ -37,8 +35,8 @@ You will be prompted that "This mod has requested extra privileges." – see the
 
 #### Note about scary warnings
 
-Cheatgui needs unsafe access to allow typing, and to enable the web console. If the warnings bother you, get the Steam workshop version, although
-you will obviously miss out on the type-to-filter and webconsole functionality.
+Cheatgui needs unsafe access for keyboard input used by type-to-filter.
+No additional DLLs are required.
 
 ## Note about paths
 

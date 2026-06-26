@@ -16,7 +16,6 @@ return {
   ["filter.show_localized_names"] = "Show localized names:",
 
   ["panel.always_cast"] = "always cast",
-  ["panel.console"] = "console",
   ["panel.flasks"] = "flasks",
   ["panel.fungal"] = "fungal",
   ["panel.gold"] = "gold",
@@ -105,13 +104,6 @@ return {
   ["fungal.force_convert"] = "[Force convert]",
   ["fungal.would_convert"] = "Would convert: {from} -> {to}",
 
-  ["console.close_host"] = "[Close console host]",
-  ["console.open_host"] = "[Open console host]",
-  ["console.open_new"] = "[Open new console]",
-  ["console.active_connections"] = "----Active connections (click to close)----",
-  ["console.connection_stats"] = "{address} [in: {input}, out: {output}]",
-  ["console.accepted_connection"] = "Accepted console connection: {address}",
-
   ["error.gui"] = "cheatgui error: {error}",
 
   ["cheat.edit_wands_everywhere"] = "[edit wands everywhere]",
@@ -120,8 +112,6 @@ return {
   ["cheat.end_fungal_trip"] = "[end fungal trip]",
   ["cheat.reset_fungal_shift_timer"] = "[reset fungal shift timer]",
   ["cheat.spawn_orbs"] = "[spawn orbs]",
-  ["cheat.open_console"] = "[open console]",
-
   ["material.liquids"] = "Liquids",
   ["material.solids"] = "Solids",
   ["material.sands"] = "Sands",

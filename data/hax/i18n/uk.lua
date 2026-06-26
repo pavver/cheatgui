@@ -15,7 +15,6 @@ return {
   ["filter.show_localized_names"] = "Локалізовані назви:",
 
   ["panel.always_cast"] = "постійне закляття",
-  ["panel.console"] = "консоль",
   ["panel.flasks"] = "фляги",
   ["panel.fungal"] = "грибні зсуви",
   ["panel.gold"] = "золото",
@@ -104,13 +103,6 @@ return {
   ["fungal.force_convert"] = "[Примусово перетворити]",
   ["fungal.would_convert"] = "Перетворення: {from} -> {to}",
 
-  ["console.close_host"] = "[Закрити сервер консолі]",
-  ["console.open_host"] = "[Відкрити сервер консолі]",
-  ["console.open_new"] = "[Відкрити нову консоль]",
-  ["console.active_connections"] = "----Активні підключення (натисніть, щоб закрити)----",
-  ["console.connection_stats"] = "{address} [вхід: {input}, вихід: {output}]",
-  ["console.accepted_connection"] = "Прийнято підключення консолі: {address}",
-
   ["error.gui"] = "помилка cheatgui: {error}",
 
   ["cheat.edit_wands_everywhere"] = "[редагування жезлів усюди]",
@@ -119,8 +111,6 @@ return {
   ["cheat.end_fungal_trip"] = "[завершити грибний тріп]",
   ["cheat.reset_fungal_shift_timer"] = "[скинути таймер грибного зсуву]",
   ["cheat.spawn_orbs"] = "[створити сфери]",
-  ["cheat.open_console"] = "[відкрити консоль]",
-
   ["material.liquids"] = "Рідини",
   ["material.solids"] = "Тверді речовини",
   ["material.sands"] = "Порошки",

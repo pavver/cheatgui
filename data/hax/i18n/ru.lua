@@ -15,7 +15,6 @@ return {
   ["filter.show_localized_names"] = "Локализованные названия:",
 
   ["panel.always_cast"] = "постоянное заклинание",
-  ["panel.console"] = "консоль",
   ["panel.flasks"] = "фляги",
   ["panel.fungal"] = "грибные сдвиги",
   ["panel.gold"] = "золото",
@@ -104,13 +103,6 @@ return {
   ["fungal.force_convert"] = "[Принудительно преобразовать]",
   ["fungal.would_convert"] = "Преобразование: {from} -> {to}",
 
-  ["console.close_host"] = "[Закрыть сервер консоли]",
-  ["console.open_host"] = "[Открыть сервер консоли]",
-  ["console.open_new"] = "[Открыть новую консоль]",
-  ["console.active_connections"] = "----Активные подключения (нажмите, чтобы закрыть)----",
-  ["console.connection_stats"] = "{address} [вход: {input}, выход: {output}]",
-  ["console.accepted_connection"] = "Принято подключение консоли: {address}",
-
   ["error.gui"] = "ошибка cheatgui: {error}",
 
   ["cheat.edit_wands_everywhere"] = "[редактирование жезлов повсюду]",
@@ -119,8 +111,6 @@ return {
   ["cheat.end_fungal_trip"] = "[завершить грибной трип]",
   ["cheat.reset_fungal_shift_timer"] = "[сбросить таймер грибного сдвига]",
   ["cheat.spawn_orbs"] = "[создать сферы]",
-  ["cheat.open_console"] = "[открыть консоль]",
-
   ["material.liquids"] = "Жидкости",
   ["material.solids"] = "Твёрдые вещества",
   ["material.sands"] = "Порошки",
