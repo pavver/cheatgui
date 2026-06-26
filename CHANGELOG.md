@@ -19,6 +19,7 @@ All notable changes to Cheatgui are documented in this file.
 - Added a complete Japanese translation.
 - Added a complete Korean translation.
 - Added a complete Polish translation.
+- Added a complete Brazilian Portuguese translation.
 - Added UTF-8 helpers for text input, case normalization, and safe character
   deletion (`c3b74f7`).
 
