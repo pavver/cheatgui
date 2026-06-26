@@ -12,6 +12,7 @@ All notable changes to Cheatgui are documented in this file.
   (`c2a4025`).
 - Added complete Russian and Ukrainian translations. Ukrainian language mods
   are recognized through both `uk` and `ua` locale aliases (`6337c3b`).
+- Added a complete German translation.
 - Added UTF-8 helpers for text input, case normalization, and safe character
   deletion (`c3b74f7`).
 
