@@ -495,7 +495,7 @@ end
 
 local localization_widget, localization_val = create_radio("Show localized names:", {
   {"Yes", true}, {"No", false}
-}, 2, 16)
+}, 1, 16)
 
 local shuffle_widget, shuffle_val = create_radio("Shuffle", {
   {"Yes", true}, {"No", false}
@@ -908,7 +908,7 @@ for idx, item in ipairs(spawn_list) do
     text = localized_name,
     path = item.path,
     id = item.xml,
-    ui_name = item.name, 
+    ui_name = resolve_localized_name(item.name, item.xml),
     f = spawn_item_button
   }
 end
