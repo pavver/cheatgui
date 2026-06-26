@@ -263,9 +263,10 @@ end
 
 local function filter_options(options, str)
   local ret = {}
+  local normalized_filter = utf8_lower(str)
   for _, opt in ipairs(options) do
-    local text = maybe_call(opt.text, opt):lower()
-    if text:find(str) then
+    local text = utf8_lower(maybe_call(opt.text, opt))
+    if text:find(normalized_filter, 1, true) then
       table.insert(ret, opt)
     end
   end
@@ -307,7 +308,7 @@ local function alphabetize(options, do_it)
   if not do_it then return options end
   local keys = {}
   for idx, opt in ipairs(options) do
-    keys[idx] = {get_option_text(opt):lower(), opt}
+    keys[idx] = {utf8_lower(get_option_text(opt)), opt}
   end
   table.sort(keys, function(a, b) return a[1] < b[1] end)
   local sorted = {}

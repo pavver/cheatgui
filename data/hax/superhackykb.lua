@@ -1,5 +1,7 @@
 print("Loading hacky KB?")
 
+dofile_once("data/hax/utf8.lua")
+
 if _hacky_keyboard_defined then
   return
 end
@@ -39,7 +41,7 @@ for i = 0, 284 do
   if keycode > 0 then
     local keyname = ffi.string(_SDL.SDL_GetKeyName(keycode))
     if keyname and #keyname > 0 then
-      code_to_a[i] = keyname:lower()
+      code_to_a[i] = utf8_lower(keyname)
       if keyname:lower():find("shift") then
         table.insert(shifts, i)
       end
@@ -82,10 +84,10 @@ hack_type = function(current_str, no_shift)
   for _, key in ipairs(pressed) do
     if (no_shift or shift_held) and REPLACEMENTS[key] then
       current_str = current_str .. REPLACEMENTS[key]
-    elseif (no_shift or shift_held) and (#key == 1) then
+    elseif (no_shift or shift_held) and utf8_is_single_character(key) then
       current_str = current_str .. key
     elseif key == "backspace" then
-      current_str = current_str:sub(1,-2)
+      current_str = utf8_remove_last_character(current_str)
     elseif key == "enter" or key == "return" then
       hit_enter = true
     end
